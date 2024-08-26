@@ -4,6 +4,11 @@ version = "0.0.1"
 description = "This is the LoRaWAN Gateway configurator CLI tool"
 authors = ["jakubawieruk <jakubawieruk@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = "config.py" },
+    { include = "gatcon.py" },
+    { include = "gateways" },
+]
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"
@@ -19,3 +24,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 gatcon = "gatcon:cli"
+
