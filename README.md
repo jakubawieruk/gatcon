@@ -1,30 +1,62 @@
 # GatCon
 
-GatCon is a CLI (Command Line Interface) application written in Python that helps with LoRaWAN Gateway configuration.
-
-
-The project uses Poetry tool for dependency management.
+**GatCon** is a command-line interface (CLI) application written in Python, designed to simplify the configuration of LoRaWAN gateways. It provides an interactive experience, guiding users through the process of configuring their gateways with ease.
 
 ## Installation
 
-To install GatCon you can download already built files or make a build yourself
+GatCon can be installed either by downloading pre-built files or by building the application from source.
 
 ### Prerequisites
 
-1. Python >3.12
+Before installing GatCon, ensure that you have the following prerequisites:
 
-### From relase files
+- Python 3.12 or higher
 
-1. Download .gz or .whl file
-2. Run in terminal `pip install gatcon-<version>.<extension>`
+### Installing from Release Files
 
-### Build and install
+To install GatCon from pre-built files:
 
-1. Clone the repository to your device.
-2. Navigate to the project directory.
-3. Run the `poetry install` command to install all dependencies.
-4. Run the `poetry build` command to make a build.
-5. Go to `/dist` and install with your package manager
+1. Download the appropriate `.gz` or `.whl` file for your platform.
+2. Open your terminal and run the following command, replacing `<version>` and `<extension>` with the appropriate values:
+
+   ```bash
+   pip install gatcon-<version>.<extension>
+   ```
+
+### Building and Installing from Source
+
+To build and install GatCon from source:
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/jakubawieruk/gatcon.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd gatcon
+   ```
+
+3. Install the necessary dependencies:
+
+   ```bash
+   poetry install
+   ```
+
+4. Build the application:
+
+   ```bash
+   poetry build
+   ```
+
+5. Navigate to the `dist` directory and install the package:
+
+   ```bash
+   cd dist
+   pip install gatcon-<version>.<extension>
+   ```
 
 ## Usage
 
