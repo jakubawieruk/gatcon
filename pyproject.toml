@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "gatcon"
+version = "0.0.1"
+description = "This is the LoRaWAN Gateway configurator CLI tool"
+authors = ["jakubawieruk <jakubawieruk@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+click = "^8.1.7"
+paramiko = "^3.4.0"
+cryptography = "<43.0.0"
+
+scp = "^0.15.0"
+pyinstaller = "^6.10.0"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+gatcon = "gatcon:cli"
