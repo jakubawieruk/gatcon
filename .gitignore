@@ -2,6 +2,5 @@ dist/
 .venv/
 __pycache__/
 build/
-poetry.lock
 .DS_Store
 main.conf
