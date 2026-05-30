@@ -4,3 +4,15 @@ __pycache__/
 build/
 .DS_Store
 main.conf
+provisioning
+
+# Tooling caches and reports
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local Claude overrides
+.claude/settings.local.json
