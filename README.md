@@ -1,6 +1,18 @@
 # GatCon
 
+[![CI](https://github.com/jakubawieruk/gatcon/actions/workflows/ci.yml/badge.svg)](https://github.com/jakubawieruk/gatcon/actions/workflows/ci.yml)
+
 **GatCon** is a command-line interface (CLI) application written in Python, designed to simplify the configuration of LoRaWAN gateways. It provides an interactive experience, guiding users through the process of configuring their gateways with ease.
+
+## Supported gateways
+
+- Kerlink Wirnet™ iStation
+
+Support for additional gateways is added under `gateways/<vendor>/<model>.py` — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+> **Note on credentials:** for the Kerlink iStation, GatCon uses the device's factory-default
+> login (`root` / `pdmk-<board id>`). This is the gateway's own default password derived from the
+> public board ID printed on the device — not a project secret.
 
 ## Installation
 
@@ -64,14 +76,11 @@ To configure a LoRaWAN gateway you have to connect the gateway to the same netwo
 
 GatCon is an interactive tool that asks about things you want to configure.
 
-## Contribution
+## Contributing
 
-If you want to contribute to the development of GatCon, you can do so by following these steps:
-
-1. Clone the repository to your device.
-2. Create a new branch for your changes.
-3. Make your changes.
-4. Send a pull request to the main repository.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for how to set up a
+development environment, run the checks (Ruff, mypy, pytest), and add support for a new
+gateway. All participants are expected to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 

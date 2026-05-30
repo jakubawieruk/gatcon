@@ -1,21 +1,22 @@
 import click
+
 from config import load_config
 from gateways.kerlink.iStation import KerlinkIStation
+
 
 @click.group(invoke_without_command=True)
 @click.pass_context
 def cli(ctx: click.Context) -> None:
     """
-    GatCon is simple tool that helps with configuration of LoRaWAN Gateways. Devices that can be configured with gatcon are listed below:
-    
+    GatCon is a simple tool that helps with configuration of LoRaWAN Gateways.
+    Devices that can be configured with gatcon are listed below:
+
     - Kerlink Wirnet™ iStation
     """
     config = load_config()
     ctx.obj = {
         "config": config,
-        "supported": {
-            "kerlink": ["istation"]
-        },
+        "supported": {"kerlink": ["istation"]},
     }
 
     click.echo("GatCon - Gateway Configuration Tool")
@@ -26,23 +27,23 @@ def cli(ctx: click.Context) -> None:
     if not isIdValid(last6digits):
         click.echo("Invalid ID")
         return
-    
+
     click.echo("Gatcon now will try to connect to the gateway with ID: ******" + last6digits)
     device = KerlinkIStation(boardid=last6digits)
     try:
         con = device.connect()
         click.echo("Connected to device.")
 
-    except:
-        click.echo("Connection failed.")
+    except Exception as e:
+        click.echo(f"Connection failed: {e}")
         return
-    
+
     if not con:
         return
     choice = click.confirm("Do you want to configure server?")
     if choice:
         serverConfig(device)
-    
+
     choice = click.confirm("Do you want to configure Network?")
     if choice:
         configureNetwork(device)
@@ -60,13 +61,16 @@ def cli(ctx: click.Context) -> None:
     if choice:
         device.reboot()
 
+
 def isIdValid(id: str) -> bool:
     if len(id) != 6:
         return False
     return True
 
+
 def validServer(server: str) -> bool:
     return True
+
 
 def serverConfig(device: KerlinkIStation) -> None:
     server = click.prompt("Please enter the server address")
@@ -76,26 +80,29 @@ def serverConfig(device: KerlinkIStation) -> None:
     device.setServer(server)
     click.echo("Server configured successfully.")
 
+
 def configureNetwork(device: KerlinkIStation) -> None:
     device.readNetwork()
-    with open("main.conf", "r") as file:
+    with open("main.conf") as file:
         lines = file.readlines()
 
-    for i, line in enumerate(lines):
-        if isinstance(line,  tuple):
-            line = ''.join(line)
+    for i, line in enumerate(lines):  # noqa: B007 - index reused after the loop
+        if isinstance(line, tuple):
+            line = "".join(line)
 
         if line.startswith("PreferredTechnologies ="):
-            current_values = line.split('=')[1].strip().split(', ')
+            current_values = line.split("=")[1].strip().split(", ")
             break
-    
+
     print("Current Preferred Technologies Order:")
     for index, tech in enumerate(current_values, 1):
         print(f"{index}. {tech}")
-    
-     # Allow the user to reorder
-    print("\nEnter the new order by specifying the numbers in the desired order, separated by spaces.")
-    order = input(f"New order (e.g., 1 2 3): ").strip().split()
+
+    # Allow the user to reorder
+    print(
+        "\nEnter the new order by specifying the numbers in the desired order, separated by spaces."
+    )
+    order = input("New order (e.g., 1 2 3): ").strip().split()
 
     # Create the new ordered list
     try:
@@ -108,43 +115,44 @@ def configureNetwork(device: KerlinkIStation) -> None:
     lines[i] = f"PreferredTechnologies = {', '.join(new_order)}\n"
 
     # Write the modified lines back to the file
-    with open("main.conf", 'w') as file:
+    with open("main.conf", "w") as file:
         file.writelines(lines)
 
     device.writeNetwork("main.conf")
 
     print("PreferredTechnologies order updated successfully.")
 
+
 def configureCellular(device: KerlinkIStation) -> None:
     device.readCellular()
-    with open("provisioning", 'r') as file:
+    with open("provisioning") as file:
         lines = file.readlines()
 
         # Check if the search_value exists in the file
         line_found = False
         for i, line in enumerate(lines):
             if line.strip() == "[operator:901,40]":
-                print(f"Found '{"[operator:901,40]"}' at line {i+1}.")
+                print(f"Found '{'[operator:901,40]'}' at line {i + 1}.")
                 line_found = True
                 break
 
         if not line_found:
             # If the line does not exist, add it and additional lines at the end
-            print(f"'{"[operator:901,40]"}' not found. Adding at the end of the file.")
+            print(f"'{'[operator:901,40]'}' not found. Adding at the end of the file.")
             additional_lines = [
-                f"{"[operator:901,40]"}\n",
+                f"{'[operator:901,40]'}\n",
                 "internet.AccessPointName = iot.1nce.net\n",
                 "internet.Username = \n",
                 "internet.Password = \n",
                 "internet.AuthenticationMethod = chap\n",
-                "internet.Protocol = ip\n"
+                "internet.Protocol = ip\n",
             ]
             lines.extend(additional_lines)
 
         # Write the modified lines back to the file
-        with open("provisioning", 'w') as file:
+        with open("provisioning", "w") as file:
             file.writelines(lines)
-        
+
         device.writeCellular("provisioning")
 
         print("File updated successfully.")
