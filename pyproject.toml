@@ -22,7 +22,7 @@ ruff = "^0.15.15"
 mypy = "^2.1.0"
 pytest = "^9.0.3"
 pytest-cov = "^7.1.0"
-types-paramiko = "^4.0.0.20260518"
+types-paramiko = ">=4.0.0.20260518,<6.0.0.0"
 
 [build-system]
 requires = ["poetry-core"]
