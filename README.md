@@ -22,7 +22,7 @@ GatCon can be installed either by downloading pre-built files or by building the
 
 Before installing GatCon, ensure that you have the following prerequisites:
 
-- Python 3.12 or higher
+- Python 3.13 or higher
 
 ### Installing from Release Files
 

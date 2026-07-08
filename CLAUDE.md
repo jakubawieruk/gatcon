@@ -6,7 +6,7 @@ Guidance for working in the GatCon repository.
 
 GatCon is an interactive **CLI tool** that configures LoRaWAN gateways over SSH/SCP. It is built
 with [Click](https://click.palletsprojects.com/) and managed with [Poetry](https://python-poetry.org/).
-Python 3.12+ only.
+Python 3.13+ only.
 
 ## Architecture
 

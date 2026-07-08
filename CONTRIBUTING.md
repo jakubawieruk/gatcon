@@ -7,7 +7,7 @@ By participating in this project you agree to abide by our [Code of Conduct](COD
 
 ## Development setup
 
-GatCon uses [Poetry](https://python-poetry.org/) and requires **Python 3.12+**.
+GatCon uses [Poetry](https://python-poetry.org/) and requires **Python 3.13+**.
 
 ```bash
 git clone https://github.com/jakubawieruk/gatcon.git
