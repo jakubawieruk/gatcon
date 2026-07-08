@@ -10,7 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Test suite (pytest) covering config loading, ID/server validation, the Kerlink iStation
   driver, and CLI dispatch.
-- GitHub Actions CI running Ruff, mypy, and pytest on Python 3.12 and 3.13.
+- GitHub Actions CI running Ruff, mypy, and pytest on Python 3.13 and 3.14.
+- Dependabot configuration for weekly Python and GitHub Actions updates.
+
+### Changed
+- Minimum supported Python raised from 3.12 to 3.13; 3.14 is now supported.
+- `cryptography` is no longer a direct dependency (it remains a transitive
+  dependency of `paramiko`).
 - Developer tooling: Ruff (lint + format), mypy, pre-commit, `.editorconfig`.
 - Contributor docs: `CONTRIBUTING.md`, issue and pull request templates.
 - `CLAUDE.md` and `.claude/settings.json` for AI-assisted development.
