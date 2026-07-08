@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gatcon"
-version = "0.0.2"
+version = "0.1.0"
 description = "This is the LoRaWAN Gateway configurator CLI tool"
 authors = ["jakubawieruk <jakubawieruk@gmail.com>"]
 readme = "README.md"
